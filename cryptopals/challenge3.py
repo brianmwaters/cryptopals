@@ -3,7 +3,7 @@
 import math
 import string
 
-from cryptopals import challenge2
+from cryptopals.challenge2 import xor
 
 # English letter frequencies distribution from A to Z. From
 # http://norvig.com/mayzner.html.
@@ -46,7 +46,7 @@ def letterize(bytes_):
     return bytes(b for b in bytes_ if chr(b).isalpha()).lower()
 
 
-def frequencies(bytes_):
+def letter_freqs(bytes_):
     """Compute the letter frequency distribution of a byte sequnce."""
     letters = letterize(bytes_)
     counts = [0 for _ in range(26)]
@@ -73,13 +73,13 @@ def score_en(bytes_):
     alphabetic ASCII characters.
     """
     # Score based on similarity of letter frequencies to English
-    freq_score = 1 - euclid_dist(frequencies(bytes_), ENGLISH_FREQ)
+    freq_score = 1 - euclid_dist(letter_freqs(bytes_), ENGLISH_FREQ)
     # Score based on % of alphabetic characters
     alpha_score = sum(1 for b in bytes_ if chr(b).isalpha()) / len(bytes_)
     return freq_score * alpha_score
 
 
-def isprintable(bytes_):
+def is_printable(bytes_):
     """Test whether a byte sequence is a printable ASCII string."""
     return all(chr(b) in string.printable for b in bytes_)
 
@@ -95,8 +95,8 @@ def solve(ciphertext):
     scores = []
     for key in range(0x100):
         crib = [key] * len(ciphertext)
-        plaintext = challenge2.xor(ciphertext, crib)
-        if isprintable(plaintext):
+        plaintext = xor(ciphertext, crib)
+        if is_printable(plaintext):
             scores.append((score_en(plaintext), key, plaintext))
     if scores:
         _, key, plaintext = max(scores)

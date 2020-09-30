@@ -2,7 +2,9 @@
 
 import bisect
 
-from cryptopals import challenge2, challenge3, challenge5
+from cryptopals import challenge3
+from cryptopals.challenge2 import xor
+from cryptopals.challenge5 import repeating_xor
 
 
 # From
@@ -18,7 +20,7 @@ def count_bits(int_):
 
 def hamming_dist(a, b):
     """Compute the Hamming distance between two byte sequences."""
-    return sum(count_bits(byte) for byte in challenge2.xor(a, b))
+    return sum(count_bits(byte) for byte in xor(a, b))
 
 
 def score_keysizes(bytes_):
@@ -46,19 +48,19 @@ def transpose(keysize, bytes_):
     return blocks
 
 
-def solve(ciphertext):
+def solve(ct):
     """Solve this challenge."""
-    keysizes_scored = score_keysizes(ciphertext)
+    keysizes_scored = score_keysizes(ct)
     solutions = []
     for keysize in keysizes_scored:
-        blocks = transpose(keysize, ciphertext)
+        blocks = transpose(keysize, ct)
         key = bytearray(keysize)
         for i, block in enumerate(blocks):
             k = challenge3.solve(block)
             if k is not None:
                 key[i] = k[0]
         key = bytes(key)
-        plaintext = challenge5.xor(key, ciphertext)
-        solutions.append((key, plaintext))
+        pt = repeating_xor(key, ct)
+        solutions.append((key, pt))
     # Filter out null keys
-    return [(key, plaintext) for key, plaintext in solutions if any(key)]
+    return [(key, pt) for key, pt in solutions if any(key)]

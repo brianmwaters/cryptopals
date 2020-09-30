@@ -1,17 +1,18 @@
 """Solution to Cryptopals Set 1, Challenge 4."""
 
-from cryptopals import challenge2, challenge3
+from cryptopals.challenge2 import xor
+from cryptopals.challenge3 import is_printable, score_en
 
 
-def solve(ciphertexts):
+def solve(cts):
     """Solve this challenge."""
     scores = []
     cribs = [[key] * 30 for key in range(0x100)]
-    for ciphertext in ciphertexts:
+    for ct in cts:
         for crib in cribs:
-            plaintext = challenge2.xor(ciphertext, crib)
-            if challenge3.isprintable(plaintext):
-                scores.append((challenge3.score_en(plaintext), plaintext))
+            pt = xor(ct, crib)
+            if is_printable(pt):
+                scores.append((score_en(pt), pt))
     if scores:
-        _, plaintext = max(scores)
-        return plaintext
+        _, pt = max(scores)
+        return pt

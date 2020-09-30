@@ -3,7 +3,7 @@
 from cryptography.hazmat.primitives.padding import PKCS7
 
 
-def pad(bytes_, length):
+def pkcs7_pad(bytes_, len_):
     """Implement PKCS #7 padding."""
-    padder = PKCS7(length * 8).padder()
+    padder = PKCS7(len_ * 8).padder()
     return padder.update(bytes_) + padder.finalize()

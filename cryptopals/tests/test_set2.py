@@ -8,4 +8,4 @@ def test_challenge9():
     input_ = b"YELLOW SUBMARINE"
     length = 20
     solution = b"YELLOW SUBMARINE\x04\x04\x04\x04"
-    assert challenge9.pad(input_, length) == solution
+    assert challenge9.pkcs7_pad(input_, length) == solution

@@ -1,11 +1,11 @@
 """Solution to Cryptopals Set 1, Challenge 5."""
 
-from cryptopals import challenge2
+from cryptopals.challenge2 import xor
 
 
-def xor(key, message):
+def repeating_xor(key, bytes_):
     """Repeating-key XOR."""
-    quotient = len(message) // len(key)
-    remainder = len(message) % len(key)
+    quotient = len(bytes_) // len(key)
+    remainder = len(bytes_) % len(key)
     pad = key * quotient + key[:remainder]
-    return challenge2.xor(pad, message)
+    return xor(pad, bytes_)

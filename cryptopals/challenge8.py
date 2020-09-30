@@ -10,7 +10,7 @@ def split_blocks(bytes_):
 
 def score_ecb(bytes_):
     """
-    Score a byte sequence based on likliehood it is an ECB mode ciphertext.
+    Score a byte sequence based on likliehood it is an ECB mode ct.
 
     The score is based on the standard deviation of the distribution of 16-byte
     blocks in the sequence.
@@ -27,11 +27,11 @@ def score_ecb(bytes_):
     return sigma
 
 
-def solve(ciphertexts):
+def solve(cts):
     """Solve this challenge."""
     scores = []
-    for ciphertext in ciphertexts:
-        scores.append((score_ecb(ciphertext), ciphertext))
+    for ct in cts:
+        scores.append((score_ecb(ct), ct))
     if scores:
-        _, ciphertext = max(scores)
-        return ciphertext
+        _, ct = max(scores)
+        return ct
