@@ -2,7 +2,7 @@
 
 import bisect
 
-from cryptopals.set1 import challenge2, challenge3, challenge5
+from cryptopals import challenge2, challenge3, challenge5
 
 
 # From

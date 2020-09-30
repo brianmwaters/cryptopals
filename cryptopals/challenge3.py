@@ -3,7 +3,7 @@
 import math
 import string
 
-from cryptopals.set1 import challenge2
+from cryptopals import challenge2
 
 # English letter frequencies distribution from A to Z. From
 # http://norvig.com/mayzner.html.

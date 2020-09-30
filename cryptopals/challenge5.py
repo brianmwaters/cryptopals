@@ -1,6 +1,6 @@
 """Solution to Cryptopals Set 1, Challenge 5."""
 
-from cryptopals.set1 import challenge2
+from cryptopals import challenge2
 
 
 def xor(key, message):

@@ -1,6 +1,6 @@
 """Solution to Cryptopals Set 1, Challenge 4."""
 
-from cryptopals.set1 import challenge2, challenge3
+from cryptopals import challenge2, challenge3
 
 
 def solve(ciphertexts):

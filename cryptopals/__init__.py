@@ -1,1 +1,1 @@
-"""Solutions to Cryptopals."""
+"""Solutions to Cryptopals challenges."""
